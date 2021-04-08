@@ -21,3 +21,14 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
+allprojects {
+    apply(plugin = "idea")
+
+    group = "dev.gihwan.armeria-issue"
+    version = "1.6.0"
+
+    repositories {
+        mavenCentral()
+    }
+}

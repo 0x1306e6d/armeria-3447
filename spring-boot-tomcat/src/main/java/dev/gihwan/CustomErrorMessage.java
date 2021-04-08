@@ -22,7 +22,33 @@
  * SOFTWARE.
  */
 
-rootProject.name = "armeria-3447"
+package dev.gihwan;
 
-include("spring-boot-tomcat")
-include("spring-boot-tomcat-armeria")
+public class CustomErrorMessage {
+
+    private int errorStatusCode;
+    private String errorMessage;
+
+    public CustomErrorMessage() {}
+
+    public CustomErrorMessage(int errorStatusCode, String errorMessage) {
+        this.errorStatusCode = errorStatusCode;
+        this.errorMessage = errorMessage;
+    }
+
+    public int getErrorStatusCode() {
+        return errorStatusCode;
+    }
+
+    public void setErrorStatusCode(int errorStatusCode) {
+        this.errorStatusCode = errorStatusCode;
+    }
+
+    public String getErrorMessage() {
+        return errorMessage;
+    }
+
+    public void setErrorMessage(String errorMessage) {
+        this.errorMessage = errorMessage;
+    }
+}

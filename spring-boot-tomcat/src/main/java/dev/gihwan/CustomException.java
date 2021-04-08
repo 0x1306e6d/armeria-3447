@@ -22,7 +22,23 @@
  * SOFTWARE.
  */
 
-rootProject.name = "armeria-3447"
+package dev.gihwan;
 
-include("spring-boot-tomcat")
-include("spring-boot-tomcat-armeria")
+public class CustomException extends RuntimeException {
+
+    private static final long serialVersionUID = 4071704407108481336L;
+
+    public CustomException() {}
+
+    public CustomException(String message) {
+        super(message);
+    }
+
+    public CustomException(String message, Throwable cause) {
+        super(message, cause);
+    }
+
+    public CustomException(Throwable cause) {
+        super(cause);
+    }
+}

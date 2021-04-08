@@ -22,7 +22,23 @@
  * SOFTWARE.
  */
 
-rootProject.name = "armeria-3447"
+plugins {
+    java
+    application
+    id("org.springframework.boot") version "2.4.4"
+    id("io.spring.dependency-management") version "1.0.11.RELEASE"
+}
 
-include("spring-boot-tomcat")
-include("spring-boot-tomcat-armeria")
+java {
+    sourceCompatibility = JavaVersion.VERSION_11
+}
+
+dependencies {
+    implementation("org.springframework.boot:spring-boot-starter-web")
+
+    testImplementation("org.springframework.boot:spring-boot-starter-test")
+}
+
+tasks.withType<Test> {
+    useJUnitPlatform()
+}

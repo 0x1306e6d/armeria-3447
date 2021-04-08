@@ -22,7 +22,27 @@
  * SOFTWARE.
  */
 
-rootProject.name = "armeria-3447"
+package dev.gihwan;
 
-include("spring-boot-tomcat")
-include("spring-boot-tomcat-armeria")
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class SimpleController {
+
+    @GetMapping("/foo")
+    public ResponseEntity<String> foo() {
+        return ResponseEntity.ok("Hello, World!");
+    }
+
+    @GetMapping("/bar")
+    public ResponseEntity<String> bar() {
+        throw new RuntimeException("an error occurred");
+    }
+
+    @GetMapping("/baz")
+    public ResponseEntity<String> baz() {
+        throw new CustomException("a custom error occurred");
+    }
+}

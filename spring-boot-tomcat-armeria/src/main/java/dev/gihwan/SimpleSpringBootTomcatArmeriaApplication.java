@@ -22,7 +22,15 @@
  * SOFTWARE.
  */
 
-rootProject.name = "armeria-3447"
+package dev.gihwan;
 
-include("spring-boot-tomcat")
-include("spring-boot-tomcat-armeria")
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class SimpleSpringBootTomcatArmeriaApplication {
+
+    public static void main(String[] args) {
+        SpringApplication.run(SimpleSpringBootTomcatArmeriaApplication.class, args);
+    }
+}

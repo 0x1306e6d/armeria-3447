@@ -46,7 +46,8 @@ import com.linecorp.armeria.server.Server;
 @SpringBootTest(
         classes = {
                 ArmeriaServerConfiguration.class,
-                SimpleController.class
+                SimpleController.class,
+                SimpleControllerAdvice.class
         },
         webEnvironment = WebEnvironment.DEFINED_PORT)
 @EnableAutoConfiguration
@@ -90,22 +91,13 @@ class SimpleControllerTest {
     }
 
     @Test
-    void baz() {
+    void baz() throws Exception {
         final WebClient client = WebClient.of("http://127.0.0.1:" + server.activeLocalPort());
         final AggregatedHttpResponse res = client.get("/baz").aggregate().join();
-        // Received 500 Internal Server Error well.
         assertThat(res.status()).isEqualTo(HttpStatus.INTERNAL_SERVER_ERROR);
 
-        // Fail to deserialize JSON because the res didn't receive any content from the server.
-        // The Spring Boot application can't handle error the “global” error page in the servlet container
-        // described in the Error Handling document. Please refer to
-        // https://docs.spring.io/spring-boot/docs/current/reference/html/spring-boot-features.html#boot-features-error-handling
-        try {
-            final CustomErrorMessage body = objectMapper.readValue(res.contentUtf8(), CustomErrorMessage.class);
-            assertThat(body.getErrorStatusCode()).isEqualTo(500);
-            assertThat(body.getErrorMessage()).isEqualTo("a custom error occurred");
-        } catch (JsonProcessingException e) {
-            fail("Fail to deserialize JSON.");
-        }
+        final CustomErrorMessage body = objectMapper.readValue(res.contentUtf8(), CustomErrorMessage.class);
+        assertThat(body.getErrorStatusCode()).isEqualTo(500);
+        assertThat(body.getErrorMessage()).isEqualTo("a custom error occurred");
     }
 }
